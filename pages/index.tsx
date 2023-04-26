@@ -6,34 +6,11 @@ import {getAllDocumentHeadersWithSlugs} from '../lib/document';
 import {DocumentsCategorized} from '../types/document';
 
 const categoryInfo: {[category: string]: {title: string; desc: string; order: number}} = {
-  'modern-cryptography': {
-    // https://sites.google.com/a/ku.edu.tr/comp443/
-    title: 'Modern Cryptography',
-    desc:
-      'All of the content here are from my notes taken during the lectures of COMP443 - Modern Cryptography by ' +
-      'Dr. Alptekin Küpçü, the material from the book "Introduction to Modern Cryptography: Principles and ' +
-      'Protocols, 2nd Edition" by Jonathan Katz & Yehuda Lindell, and several of Dan Boneh\'s cryptography lectures. ',
-    order: 4,
-  },
-  zkhack: {
-    // https://zkhack.dev/
-    title: 'Zero-Knowledge: ZKHACK Modules',
-    desc: 'My notes from ZKHACK modules.',
-    order: 3,
-  },
-  'number-theory': {
-    // https://www.youtube.com/watch?v=EzE6it9kAsI&list=PL8yHsr3EFj53L8sMbzIhhXSAOpuZ1Fov8
-    title: 'Number Theory',
-    desc: 'These are notes taken from "Introduction to Number Theory" open lectures by Prof. Richard Borcherds in his YouTube channel.',
-    order: 2,
-  },
   zklearning: {
     // https://zk-learning.org/
-    title: 'Zero-Knowledge: ZKP MOOC Spring 2023',
+    title: 'Zero-Knowledge',
     desc:
-      'Summary of ZKP MOOC Spring 2023 lectures, which are a series of lectures given by Dr. Dan Boneh, Dr. Shafi Goldwasser, ' +
-      'Dr. Dawn Song, Dr. Justin Thaler and Dr. Yupeng Zhang. This course covers fundamental techniques to build ZKP protocols, ' +
-      'tools to implement ZKP for different computations, and different applications of ZKP in blockchain and other areas',
+      'Zero Knowledge Blog where I write about several usefull tools in the ZKP world. I try to explain the concepts in a simple way and give examples.',
     order: 1,
   },
 };

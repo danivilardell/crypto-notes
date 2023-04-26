@@ -15,3 +15,6 @@ hr {
 @import './preview.scss';
 @import './markdown.scss';
 @import './foreword.scss';
+
+// images style
+img[alt=test] { width: 100%; }
