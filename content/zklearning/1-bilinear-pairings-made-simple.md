@@ -1,6 +1,6 @@
 ---
 title: 'Bilinear Pairings Made Simple'
-desc: 'A simple explanation of bilinear pairings, some use cases and a more in depth example with Tate pairing.'
+desc: 'A simple explanation of bilinear pairings, some use cases and a more in depth example with Weil pairing.'
 order: 1
 cat: 'zklearning'
 ---
@@ -15,7 +15,7 @@ A bilinear pairing can be formally defined as a function $e : G_1 \times G_2 \ri
 - Non-degeneracy: $ e \neq 1$
 - Computablility: There exists an efficient algorithm to compute e.
 
-We could also have it be a symmetrical bilinear pairing if we require $e(P, Q) = e(Q, P)$. In this blog post we will construct a symmetrical bilinear pairing known as the Tate pairing.
+We could also have it be a symmetrical bilinear pairing if we require $e(P, Q) = e(Q, P)$. In this blog post we will construct a symmetrical bilinear pairing known as the Weil pairing.
 
 Our main goal when constructing a bilinear pairing is to have a group with the discrete logarithm assumption but where the decision Diffie Hellman problem is not hard. This problem can be defined as follows:
 
@@ -45,13 +45,11 @@ We can also prove soundness of this scheme as long as the discrete logarithm pro
 
 ## Zero-Knowledge Proofs
 
-Some of the most used SNARKs(Succinct Non-Interactive Arguments of Knowledge) use bilinear pairings in order to work. We will not go into detail about how SNARKs work, but we will show how we can use bilinear pairings to construct a simple polynomial commitment scheme known as KZG. 
+Bilinear pairings in ZKP are an important building block as they allow to build efficient polynomial commitment schemes such as ZKP or fast SNARKs such as Groth16. We will not go into detail on how they are used in these protocols, but but I might cover that in another blog post some day. For now, if interested in learning more about this, I recommend the lectures in the [ZKP MOOC](https://zk-learning.org) organized by Berkeley.
 
-... FINISH LATER
+# Weil Pairing
 
-# Tate Pairing
-
-Now that we have some basic understanding of how bilinear pairings work and why they are important, we will show a step by step construction of a specific bilinear pairing known as the Tate pairing. Before we strictly define it, we will have to cover some basic math concepts.
+Now that we have some basic understanding of how bilinear pairings work and why they are important, we will show a step by step construction of a specific bilinear pairing known as the Weil pairing. Before we strictly define it, we will have to cover some basic math concepts.
 
 ## Elliptic Curves
 
@@ -76,16 +74,16 @@ To get an intuitive grasp of addition we can look at the following image:
 
 The image shows how does addition behave if the curve where to be defined over the real numbers. Nonetheless, curves can be defined over more abstract fields. We will work from now on with elliptic curves defined over finite fields.
 
-## Back to Tate pairing
+## Back to Weil pairing
 
-After this brief elliptic curve introduction we can specify what will groups $G_1$, $G_2$ and $G_T$ be in the case of the Tate pairing.
+After this brief elliptic curve introduction we can specify what will groups $G_1$, $G_2$ and $G_T$ be in the case of the Weil pairing.
 - $G_1$ is an elliptic curve where the points satisfy the equation $y^2 = x^3 + b$ over the field $\mathbb{F}_p$.
 - $G_2$ is an elliptic curve where the points satisfy the same equation as in $G_1$ but defined over the field $\mathbb{F}_{p^{12}}$.
 - $G_t$ is the multiplicative group in $\mathbb{F}_{p^{12}}$.
 
 We can now see why we specified $G_1$ and $G_2$ as additive groups, since the operation in elliptic curves by convention is written as an addition, whereas for the multiplicative group in $\mathbb{F}_{p^{12}}$ we will use the multiplicative notation. 
 
-Even though we have already found where are we going to be working on, we still need some more math tools to be able to construct the Tate pairing.
+Even though we have already found where are we going to be working on, we still need some more math tools to be able to construct the Weil pairing.
 
 ## Some more math concepts: Divisors
 
@@ -108,7 +106,7 @@ An interesting fact about divisors is that if they define a curve in a projectiv
 
 Another interesting and useful theorem that we will use is the fact that if you "remove" the brakets from the divisors, the points will add to infinity. For example, if we have $D = [P]+[Q]+[-P-Q] - 3[O], then we have $P+Q-P-Q-3O = -3O = O$(All points at infinity are the same). The fascinating thing is that if we have a divisor that follows this rule, then it is the divisor of a function. This is called the Riemann-Roch theorem and it's a very important theorem in algebraic geometry. We will use this theorem to make sure that the divisors we use are the divisors of a function we can later reconstruct.
 
-## Back to Tate pairing, bilinearity on the first component
+## Back to Weil pairing: Bilinearity on the first component
 
 Recall the groups $G_1$, $G_2$ and $G_T$ from before. Lets say $n$ is the order of $G_1$, then we define the following functions:
 
@@ -148,10 +146,125 @@ Lets see now how can we fix some things in order to have bilineality on the seco
 
 We got to the point where math starts getting a bit trickier. Whenever we have defined a concept, for example vector spaces or topological spaces, then next item in the list is to talk about maps between those types of spaces. In this case we will talk about maps between curves which are called isogenies. 
 
-## Bilinearity on the second component
+The formal definition of isogeny is a morphism of algebraig groups that is surjective and has a finite kernel. We will not go into the details of what this means, but we will try to understand what this means in the context of elliptic curves. For elliptic curves isogenies are maps from $E_1$ to $E_2$, both of them elliptic curves, such that the point at infinity is mapped to the point at infinity.
+
+We will define the isogenie we will use throughout this article as follows:
+
+$$
+\begin{align*}
+  [m] \colon E &\to E \quad m\in \mathbb{Z} \\
+  P &\mapsto m\cdot P
+\end{align*}
+$$
+
+As a corol·lary to the Rieman-Roch theorem, we know that an isogenie is eather constant or surgective. It can be proven that this isogenie is not constant.
+
+We can also check that $[m](O) = mO = O$ and therefore sends the point at infinity to the point at infinity.
+
+This isogenie will enable us to define the m-Torsion subgroup of an elliptic curve for $m \in \mathbb{Z}$ as the are the points that multiplied by $m$ give the point at infinity. More formally we have:
+
+$$
+E[m] = \{P \in E \colon [m]P = O\}
+$$
+
+Finally, we will give a definition of the function $[m]^*$, which is the a particular case of a bigger mathematical concept which we will only need to understad with $[m]$. If we consider $div(E)$ to be the set of divisors of $E$, then this function is defined as follows:
+
+$$
+\begin{align*}
+  [m]^* \colon div(E) &\to div(E) \\
+  (P) &\mapsto \sum_{Q \in [m]^{-1}(P)}(Q)
+\end{align*}
+$$
+
+Yeah, this is starting to get messy, but this is not a random definition, we are mapping a divisor to the sum of divisor of the points that map to the original divisor. This will help a lot when defining the Weil pairing. But in order to understand a bit all this definitions lets give a concrete example.
+
+Consider $T \in E[m]$, then we know that $[m](T) = m\cdot T = O$ and therefore $T$ is a point of order $T$. Consider the divisor $m(T)-m(O)$ which is a divisor of a function since $m\cdot T - m\cdot O = O - m \cdot O = O$. 
+
+Consider now $T'$ such that $[m]T' = T$. We can ensure this $T'$ exists since all isogenies are constant or surjective and we know there is a result that proves that $[m]$ is non constant. Then we can consider the divisor $D = [m]^*(T) - [m]^*(O) = \sum_{R\in E[m]}(T'+R)-\sum{R \in E[m]}(R)$. Lets study this last equality a bit more thoroughly. 
+
+In the first place we have to see that $\{Q \in [m]^{-1}(T)\} = \{T'+R\ \colon R \in E[m]\}$ which is true since $[m](T'+R) = [m](T') + [m](R) = T + O = T$. We also know for a fact that if $m$ is a coprime to the order of the field the eliptic curve is working on, then the m-torsion subgroup has $m^2$ elements, and they are the points $(x, y)$ such that $(mx, my)=(0, 0)$ in the finite field $F_p$. Therefore we can check that 
+$$
+\sum_{R\in E[m]}T'+R-\sum{R \in E[m]}R = \sum_{R\in E[m]}T' = m^2T' = mT = O
+$$ 
+and we can again ensure that there exists a function $f$ such that $div(f)=D$.
+
+## Finally, back to Weil pairing: Bilinearity on the second component
+
+We finally have all tools needed to finish building this pairing. Let's consider this two functions, where here m is not the order of the group like it was when we got bilinearity on the first component, but an integer coprime with the order of the group:
+
+- $f$ such that $div(f) = m(P)-m(O)$
+- $div(g) = \sum_{R \in E[m]}(P'+R) - \sum_{R \in E[m]}(R)$ where $P'$ is a point such that $[m](P') = P$
+
+This looks a lot like the example we saw last section! We can see now that
+
+$$
+div(g^m) = m\cdot div(g) = \sum_{R \in E[m]}m(P'+R) - \sum_{R \in E[m]}(R) \\
+dig(f([m])) = m \cdot \sum_{R \in E[m]}(P'+R)-(R)
+$$
+
+Both functions $g^m$ and $f\circ [m]$ have the same divisor and therefore differ by a constant! Lets consider then $f$ such that the equality holds and therefore we have:
+
+$$
+g^m = f([m])
+$$
+
+Now, for any $X \in E$ and $S \in E[m]$, we have
+
+$$
+g(X+S)^m = f([m](X+S)) = f([m]X+[m]S) = f([m](X)) = g(X)^m \implies \left(\frac{g(X+S)}{g(X)}\right)^m = 1
+$$
+
+And therefore we know that $\frac{g(X+S)}{g(X)} \in \mu_m \subseteq F$ where $\mu_m$ are the $m$ roots of unity of $F$. But 
+
+$$
+\begin{align*}
+    E &\to F \\ 
+  X &\mapsto \frac{g(X+S)}{g(X)}
+\end{align*}
+$$
+
+is a morphism (since E is smooth) which is eather constant or surgective, but we proved that it is also a root of unity and $\mu_m \subsetneq F$ which implies that this morphism is constant.
+
+Therefore $\frac{g(X+S)}{g(X)}$ is constant on $X$! 
+
+In order to achieve bilinearity on the second component we will have to change a bit the group we worked on in the first part of the blog, and we will have to start working on the $m$ torsion subgroup of $E$, for $m$ coprime with the order of the prime $p$ the eliptic curve is defined on.
+
+We will finally define the Weil pairing as follows:
+
+$$
+\begin{align*}
+    e\colon E[m]\times E[m] &\to \mu_m \\ 
+    (P, Q) &\mapsto e_m(P, Q) = \frac{g_P(X+Q)}{g_P(X)}
+\end{align*}
+$$
+
+Remember that $P$ is hidden in the definition of the function $g$ and this is a one of the reasons why this pairing es expensive to compute!
+
+Lets now prove bilinearity on the second coordinate:
+
+$$
+e_m(P, Q_1+Q_2) = \frac{g_P(X+S1+S2)}{g_P(X)} = \frac{g_P(X+S1+S2)}{g_P(X+S1)}\cdot \frac{g_P(X+S1)}{g_P(X)} = e_m(P, Q_1)\cdot e_m(P, Q_2)
+$$
+
+The last equality uses the fact that $e_m(P, Q_1)$ is constant on $X$ and therefore we can consider $X+S1=X'$ in the first fraction.
+
+Now we may think we have finished, but we still have to prove bilinearity on the first component! We changed too much stuff from the previous approach and we may have lost this property. Let's see that we have not. It can be proven that the weil pairing can be written in another way as
+
+$$
+e_m(P, Q) = (-1)^m\frac{f_P(Q)}{f_Q(P)}
+$$
+
+From where we can clearly see that $e_m(P, Q) = e_m(Q, P)^{-1}$ and therefore we have bilinearity on the first component by the fact that we proved bilinearity on the second component. The proof of the equivalence of both definitions of the Weil pairing is out of the scope of this blog, but it can be found in [5] in theorem 7.
+
+## Conclusion
+
+We have made it to the end! If you understood everything, congratulations, it took me days to fully get a basic grasp on in and that is what pushed me to write this blog to make the explanation as simple as possible.
+
+I tried to give some intuition on why we do each thing and why it works, but I may have failed in some parts. If you have any questions or suggestions, please let me know!
 
 # References
 
+[0] [Lectures about arithmetic on Elliptic Curves by Alvaro Lozano-Robledo](https://www.youtube.com/watch?v=aIB7WAbHyF4&list=PLYpVTXjEi1oe1OeAllJpNhFoI4B7Ws8Yl&index=18)
 
 [1] [Stanford notes on Tate Pairing](https://crypto.stanford.edu/pbc/notes/ep/tate.html)
 
@@ -160,3 +273,5 @@ We got to the point where math starts getting a bit trickier. Whenever we have d
 [3] [Stackexchange question about divisors for curves](https://crypto.stackexchange.com/questions/55342/i-cannot-understand-the-concept-of-a-divisor-for-an-elliptic-curve)
 
 [4] [MIT notes on Elliptic curves](https://ocw.mit.edu/courses/18-783-elliptic-curves-spring-2021/pages/syllabus/)
+
+[5] [Bilinear pairings on elliptic curves](https://arxiv.org/pdf/1301.5520.pdf)
