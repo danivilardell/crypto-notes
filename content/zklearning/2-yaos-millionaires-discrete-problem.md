@@ -6,7 +6,7 @@ cat: 'zklearning'
 ---
 
 # Yao's Millionaire's problem
-Yao's Millionaire's problem is a secure multi-party computation problem first introduced by Andrew Yao back in 1982 that tries to solve the following problem: Alice and Bob want to compare their salaries to see who is earning the most, nonetheless, they don't want to reveal anything about their salaries but the one bit of information that says if it's lower or higher than the other salary. 
+Yao's Millionaire's problem is a secure multi-party computation problem first introduced by Andrew Yao back in 1982 that tries to solve the following: Alice and Bob want to compare their salaries to see who is earning the most, nonetheless, they don't want to reveal anything about their salaries but the one bit of information that says if it's lower or higher than the other salary. 
 
 This can be simplified by saying that we want a protocol that lets us check if $a \geq b$ without revealing $a$ nor $b$. 
 
@@ -31,8 +31,8 @@ I will provide a simple solution that I read the first time this problem was pro
 
 Since we are working on the finite case we have $n$ possible values of salary. The protocol will work as follows:
 
-- Alice enters the room and gets $n$ boxes labeled with each possible salary value. She then puts inside the box a piece of paper with "Yes" written if the box's salary is lower than hers and "No" otherwise. Alice then leaves the room.
-- Bob now enters the room and checks the paper inside the box with his salary value and checks whether the written value is "Yes" or "No". If the value is "Yes" he knows that his salary is lower than Alice's and if it's "No" he knows that his salary is higher than Alice's. Bob then leaves the room and tells Alice the result.
+- Alice enters the room and gets $n$ boxes labeled with each possible salary value. She then puts inside each box a piece of paper with "Yes" written if the box's salary is lower than hers and "No" otherwise. Alice then leaves the room.
+- Bob now enters the room and reads the paper inside the box with his salary value and checks whether the written value is "Yes" or "No". If the value is "Yes" he knows that his salary is lower than Alice's and if it's "No" he knows that his salary is higher than Alice's. Bob then leaves the room and tells Alice the result.
 
 This simple solution to the problem may seem correct, but it doesn't take into account that, without the use of a third party it's impossible to know if Bob opened one, two or all the boxes in the room. 
 
@@ -49,6 +49,12 @@ Taking into account that the finite set is of size n, let $m_1, ..., m_n$ be $1$
 - Bob will finally compute $m_b = m_b' - k$ and will know the value of the box.
 
 We can see that this protocol is correct because if $b = i$ then $k_i = k$ and $m_b = m_i'-k = m_i+k_i-k = m_i$; and if $b \neq i$ then $m_b = m_i'-k = m_i+k_i-k \neq m_i$ and since $k_i$ is a random value, Bob won't be able to get any information about $m_i$.
+
+# Final thoughts
+
+This protocol is a simple solution to the problem that can be used in many real-life scenarios. Nonetheless, it is not the most efficient solution as it requires $n$ exponentiations and $n$ modular multiplications. Can any simpler solution be found? Or can any faster solution be found?
+
+Another question I have is if any simple solution can be found specifically for the discrete case (non-finite). If any reader has any ideas, please let me know!
 
 # References
 
