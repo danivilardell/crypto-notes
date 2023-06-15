@@ -1,6 +1,6 @@
 ---
 title: 'Bilinear Pairings Made Simple'
-desc: 'A simple explanation of bilinear pairings, some use cases and a more in-depth example with Weil pairing.'
+desc: 'A short and clear explanation of bilinear pairings, some use cases and a more in-depth example with Weil pairing.'
 order: 1
 cat: 'zklearning'
 ---
@@ -75,8 +75,7 @@ It can be proven that it is well defined (any line through any two points (or on
 
 Here we have an image to get an intuitive grasp of addition on an elliptic curve over the real numbers:
 
-![test](img/zklearning/ECClines.png)
-<img src="img/zklearning/ECClines.png" alt="drawing"/>
+![ECCdrawing](img/zklearning/bilinear_pairings/ECClines.png)
 
 The image shows how addition behaves over the real numbers, nonetheless, curves can be defined over more abstract fields. We will work from now on with elliptic curves defined over finite fields.
 

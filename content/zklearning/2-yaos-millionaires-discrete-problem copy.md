@@ -1,6 +1,6 @@
 ---
 title: "Yao's Millionaire's discrete problem"
-desc: "Simple alternative solution to Yao's Millionaire's problem discrete finite version I came up with while learning about oblivious transfer protocols"
+desc: "Alternative solution to Yao's Millionaire's problem discrete finite version I came up with while learning about oblivious transfer protocols"
 order: 2
 cat: 'zklearning'
 ---
