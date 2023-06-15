@@ -1,6 +1,6 @@
 ---
 title: "Ball sorting game with ZKP"
-desc: "A ZKP protocol to prove knowledge of the ball sorting puzzle solution in t steps. It has been proven to be an NP-complete problem, and therefore the straightforward protocol based on NP reduction and later using 3-coloring ZKP proof would work. Here we provide a protocol that can be executed with playing cards."
+desc: "A ZKP physical protocol to prove knowledge of the solution to a ball sorting puzzle in t steps using playing cards."
 order: 3
 cat: 'zklearning'
 ---
@@ -13,7 +13,9 @@ The ball sorting puzzle is a game that has been played a lot lately on smartphon
 
 Even though this version of the puzzle is the standard one, it has not been proven if finding a solution in $t$ steps is NP-complete. However, there is a variant of the puzzle that has been proven to be NP-complete, and it is the one we will use in this post. This variant adds a new constraint: the top ball of a tube can only be moved to a tube that is either empty or has a ball of the same color on top.
 
-Even though having a protocol for the first version would also be useful, it is always more interesting to have protocols for NP statements.
+Having a protocol for the first version would also be useful, nonetheless, it is always more interesting to have protocols for NP statements. 
+
+Since the problem is NP-complete, there exists a polynomial time reduction to the 3-coloring problem, which has a simple ZKP protocol. This means that we could build a ZKP proof by solving the reduced 3-coloring problem, nonetheless, this would be a bit boring and the reduction is not always trivial or short. Instead, we will build a ZKP protocol for the ball sorting puzzle directly and by using cards, so it can be executed just with a simple card deck.
 
 # Idea of the protocol
 
