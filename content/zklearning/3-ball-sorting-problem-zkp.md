@@ -15,7 +15,7 @@ Even though this version of the puzzle is the standard one, it has not been prov
 
 Having a protocol for the first version would also be useful, nonetheless, it is always more interesting to have protocols for NP statements. 
 
-Since the problem is NP-complete, there exists a polynomial time reduction to the 3-coloring problem, which has a simple ZKP protocol. This means that we could build a ZKP proof by solving the reduced 3-coloring problem, nonetheless, this would be a bit boring and the reduction is not always trivial or short. Instead, we will build a ZKP protocol for the ball sorting puzzle directly and by using cards, so it can be executed just with a simple card deck.
+Since the problem is NP-complete, there exists a polynomial time reduction to the 3-coloring problem, which has a simple ZKP protocol[1]. This means that we could build a ZKP proof by solving the reduced 3-coloring problem, nonetheless, this would be a bit boring and the reduction is not always trivial or short. Instead, we will build a ZKP protocol for the ball sorting puzzle directly and by using cards, so it can be executed just with a simple card deck.
 
 # Idea of the protocol
 
@@ -111,3 +111,5 @@ I hope you enjoyed it and learned something new!
 # References
 
 [0] [Physical Zero-Knowledge Proof for Ball Sort Puzzle](https://arxiv.org/pdf/2302.07251.pdf)
+
+[1] [Zero-Knowledge Proof for 3-colorable graph](https://www.cs.cmu.edu/~goyal/s18/15503/scribe_notes/lecture23.pdf)
