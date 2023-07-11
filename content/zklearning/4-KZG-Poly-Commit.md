@@ -87,6 +87,20 @@ Let $\langle g, g^a \rangle$ be the DL instance that $\mathcal{B}$ needs to solv
 
 This is a pretty cool proof of the hiding property of the scheme and can be found, along with the proof of the evaluation-binding property in [1], the extended version of the KZG paper.
 
+# Interesting properties
+
+An interesting property of this commitment is that it's homomorphic, which means that if we had two witness tuples $\langle y, \phi_1(y), w_{y,1} \rangle$ and $\langle y, \phi_2(y), w_{y,2} \rangle$, then we can produce the tuple $\langle y, \phi_1(y) + \phi_2(y), w_{y,1} \cdot w_{y,2} \rangle$ which is a valid witness for the polynomial $\phi_1(x) + \phi_2(x)$. That enables us to improve the hiding property, which is only valid for polynomial running time adversaries to an unconditional hiding property, which means that the hiding property holds for any adversary, even if he has infinite computational power. This is pretty cool, as it's the same as saying that when providing a witness we are only giving the information about the evaluation, and nothing more, in terms of information theory.
+
+This is done by adding a random polynomial to our polynomial and providing proof for the sum. You can find the full procedure in [0] along with its proofs in [1].
+
+Another interesting property is the fact that we can batch multiple evaluation proofs into one single group element, enabling us to prove multiple evaluations at once. 
+
+This is done by modifying the witness generation to have $\Phi_B(x) = \frac{\phi(x)-r(x)}{\prod_{y\in B} (x-y)}$ where $B$ is the set of points we want to prove and $r(x)$ is the remainder of the polynomial division of $\frac{\phi(x)}{\prod_{y \in B}(x-y)}$, therefore we have that $\phi(x) - r(x) = \Phi_B(x)\prod_{y \in B}(x-y)$ and for $i \in B$ we have $\phi(i) = r(i)$. We can think of this as the same we did before, instead of having $\phi(y)$ we have a polynomial $r(x)$ that interpolates the points $\langle y, \phi(y) \rangle$. Now, the witness creation outputs $\langle B, r(x), w_B \rangle$ where $w_B$ is the same as before, $w_B = g^{\Phi_B(\alpha)}$.
+
+Now we can change the verification algorithm to work with batch witnesses the following way: we will have to check if $e(g^{\phi(\alpha)-r(\alpha)}, g) = e(g^{\Phi_B(\alpha)}, g^{\prod_{y \in B}(\alpha - y)})$. The reason this works is left as an exercise to the reader and is done the same way it was done in the non-batch case.
+
+Finally mention one minor interesting properties which is the fact that both the witness and the commitment are constant in size, which is pretty cool!
+
 # Conclusion
 
 We have seen how to create a polynomial commitment scheme that is constant in size and has a constant size witness. We have also seen how to prove that the scheme is hiding and an informal proof of the evaluation-binding property! 
