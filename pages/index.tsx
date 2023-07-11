@@ -8,9 +8,9 @@ import {DocumentsCategorized} from '../types/document';
 const categoryInfo: {[category: string]: {title: string; desc: string; order: number}} = {
   zklearning: {
     // https://zk-learning.org/
-    title: 'Zero-Knowledge',
+    title: 'Zero Knowledge Proofs',
     desc:
-      'Zero Knowledge Blog where I write about several usefull tools in the ZKP world. I try to explain the concepts in a simple way and give examples.',
+      "Zero Knowledge Proofs Blog where I write about several usefull tools in the ZKP world. I try to explain the concepts in a simple way and give examples, as well as find interesting topics that haven't been written much about.",
     order: 1,
   },
 };
