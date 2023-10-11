@@ -1,8 +1,8 @@
 ---
 title: "Yao's Millionaire's discrete problem"
 desc: "Alternative solution to Yao's Millionaire's problem discrete finite version I came up with while learning about oblivious transfer protocols"
-order: 2
-cat: 'zklearning'
+order: 1
+cat: 'random_crypto'
 ---
 
 # Yao's Millionaire's problem

@@ -1,7 +1,7 @@
 ---
 title: "PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge"
 desc: "Read the blog if you wanna find out why it has such a long name."
-order: 5
+order: 3
 cat: 'zklearning'
 ---
 
@@ -183,7 +183,7 @@ We can see that the only thing that forced us to have addition and multiplicatio
 
 For example, if we had a gate that given $x_1, x_2$ outputs $x_1^2+x_1*x_2$, which we will name new gate, we could just check that:
 $$
-q_L(x)\cdot f_L(x) + q_R(x)\cdot f_R(x) + q_O(x)\cdot f_O(x) + q_M(x)\cdot f_L(x)\cdot f_R(x) + q_{new}(x)\cdot (f_L(x)\cdot f_L(x)+f_L(x)\cdot f_R(x)) + (q_C(x) - PI(x)) = 0 \quad \forall x \in H
+q_L(x)\cdot f_L(x) + q_R(x)\cdot f_R(x) + q_O(x)\cdot f_O(x) + q_M(x)\cdot f_L(x)\cdot f_R(x) + \\ q_{new}(x)\cdot (f_L(x)\cdot f_L(x)+f_L(x)\cdot f_R(x)) + (q_C(x) - PI(x)) = 0 \quad \forall x \in H
 $$
 
 This could even be extended to having whole hash functions as gates! This makes helps in making the circuit more efficient since we are using the "repetition" property of having personalized gates.

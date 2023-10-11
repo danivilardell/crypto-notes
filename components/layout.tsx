@@ -10,7 +10,7 @@ const Layout: FC<{children: ReactNode}> = ({children}) => {
             <a className="link title">Cryptonotes</a>
           </Link>
           <div />
-          <a href="https://github.com/erhant/crypto-notes" target="_blank" rel="noreferrer" className="link">
+          <a href="https://github.com/danivilardell/crypto-notes" target="_blank" rel="noreferrer" className="link">
             GitHub
           </a>
         </div>

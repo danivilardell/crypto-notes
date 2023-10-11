@@ -1,7 +1,7 @@
 ---
 title: "KZG Polynomial Commitment, the Building Block of Zero Knowledge Proofs"
 desc: "Quick explanation of KZG polynomial commitment, which I will later use in another blog to build the first zk-SNARK, PLONK."
-order: 4
+order: 2
 cat: 'zklearning'
 ---
 

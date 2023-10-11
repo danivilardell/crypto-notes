@@ -1,8 +1,8 @@
 ---
 title: "Ball sorting game with ZKP"
 desc: "A ZKP physical protocol to prove knowledge of the solution to a ball sorting puzzle in t steps using playing cards."
-order: 3
-cat: 'zklearning'
+order: 2
+cat: 'random_crypto'
 ---
 
 # Ball sorting puzzle game
